@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import styled from 'styled-components';
 
 const StyledNote = styled.article`
@@ -25,21 +25,23 @@ const UserAction = styled.div`
 
 const Note = ({ note }) => {
   return (
-    <StyledNote><MetaData><MetaInfo>
-      <img
-        src={note.author.avatar}
-        alt='{note.author.username} avatar'
-        height='50px'
-      />
-    </MetaInfo>
-      <MetaInfo>
-        <em>by</em> {note.author.username} <br />
-        {format(note.createdAt, 'MMM Do YYYY')}
-      </MetaInfo>
-      <UserAction>
-        <em>Favorites:</em> {note.favoriteCount}
-      </UserAction>
-    </MetaData>
+    <StyledNote>
+      <MetaData>
+        <MetaInfo>
+          <img
+            src={note.author.avatar}
+            alt='{note.author.username} avatar'
+            height='50px'
+          />
+        </MetaInfo>
+        <MetaInfo>
+          <em>by</em> {note.author.username} <br />
+          {format(parseISO(note.createdAt), 'MMM do yyyy')}
+        </MetaInfo>
+        <UserAction>
+          <em>Favorites:</em> {note.favoriteCount}
+        </UserAction>
+      </MetaData>
       <ReactMarkdown source={note.content} />
     </StyledNote>
   )

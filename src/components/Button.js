@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = styled.Button`
+const Button = styled.button`
   display: block;
   padding: 10px;
   border: none;
