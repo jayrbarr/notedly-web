@@ -1,0 +1,75 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _client = require("@apollo/client");
+
+  var _Note = _interopRequireDefault(require("../components/Note"));
+
+  var _s = $RefreshSig$();
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  function _templateObject() {
+    var data = _taggedTemplateLiteral(["\n  query note($id: ID!) {\n    note(id: $id) {\n      id\n      createdAt\n      content\n      favoriteCount\n      author {\n        username\n        id\n        avatar\n      }\n    }\n  }\n"]);
+
+    _templateObject = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+  var GET_NOTE = (0, _client.gql)(_templateObject());
+
+  var NotePage = function NotePage(props) {
+    _s();
+
+    var id = props.match.params.id;
+
+    var _useQuery = (0, _client.useQuery)(GET_NOTE, {
+      variables: {
+        id: id
+      }
+    }),
+        loading = _useQuery.loading,
+        error = _useQuery.error,
+        data = _useQuery.data;
+
+    if (loading) return /*#__PURE__*/_react["default"].createElement("p", null, "Loading...");
+    if (error) return /*#__PURE__*/_react["default"].createElement("p", null, "Error! Note not found.");
+    return /*#__PURE__*/_react["default"].createElement(_Note["default"], {
+      note: data.note
+    });
+  };
+
+  _s(NotePage, "OQZiY3KqWoytFPIJWw/H9Hrmbok=", false, function () {
+    return [_client.useQuery];
+  });
+
+  _c = NotePage;
+  var _default = NotePage;
+  exports["default"] = _default;
+
+  var _c;
+
+  $RefreshReg$(_c, "NotePage");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

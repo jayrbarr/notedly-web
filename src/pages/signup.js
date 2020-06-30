@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useMutation, useApolloClient, gql } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
-import Button from '../components/Button';
+import UserForm from '../components/UserForm';
 
 const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -10,91 +10,29 @@ const SIGNUP_USER = gql`
   }
 `;
 
-const Wrapper = styled.div`
-  border: 1px solid #f5f4f0;
-  max-width: 500px;
-  padding: 1em;
-  margin: 0 auto;
-`;
-
-const Form = styled.form`
-  label,
-  input {
-    display: block;
-    line-height: 2em;
-  }
-  input {
-    width: 100%;
-    margin-bottom: 1em;
-  }
-`;
-
 const SignUp = props => {
-
-  const [values, setValues] = useState();
-
-  const onChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    })
-  }
-
-  const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
-    onCompleted: data => {
-      console.log(data.signUp);
-    }
-  });
-
-  const onSubmit = event => {
-    event.preventDefault();
-    signUp({
-      variables: {
-        ...values
-      }
-    });
-  }
 
   useEffect(() => {
     document.title = 'Sign Up - Notedly';
   });
 
+  const client = useApolloClient();
+
+  const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
+    onCompleted: data => {
+      localStorage.setItem('notejwt2020', data.signUp);
+      client.writeData({ data: { isLoggedIn: true } });
+      props.history.push('/');
+    }
+  });
 
   return (
-    <Wrapper>
-      <h2>Sign Up</h2>
-      <Form onSubmit={onSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          required
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
-          onChange={onChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          required
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          onChange={onChange}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          required
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          onChange={onChange}
-        />
-        <Button type="submit">Submit</Button>
-      </Form>
-    </Wrapper>
-  );
+    <>
+      <UserForm action={signUp} formType="signup" />
+      {loading && <p>Loading...</p>}
+      {error && <p>Error creating an account!</p>}
+    </>
+  )
 }
 
 export default SignUp;

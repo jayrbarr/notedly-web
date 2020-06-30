@@ -1,0 +1,56 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _reactRouterDom = require("react-router-dom");
+
+  var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  var Nav = _c = _styledComponents["default"].div.withConfig({
+    displayName: "Navigation___c",
+    componentId: "sc-1cusjcp-0"
+  })(["padding:1em;background:#f5f4f0;@media (max-width:700px){padding-top:64px;}@media (min-width:700px){position:fixed;width:200px;height:calc(100% - 64px);overflow-y:scroll;}"]);
+
+  var NavList = _c2 = _styledComponents["default"].ul.withConfig({
+    displayName: "Navigation___c2",
+    componentId: "sc-1cusjcp-1"
+  })(["margin:0;padding:0;list-style:none;line-height:2;a{text-decoration:none;font-weight:bold;font-size:1.1em;color:#333;}a:visited{color:#333;}a:hover,a:focus{color:#0077cc;}"]);
+
+  var Navigation = function Navigation() {
+    return /*#__PURE__*/_react["default"].createElement(Nav, null, /*#__PURE__*/_react["default"].createElement(NavList, null, /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: "/"
+    }, "Home")), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: "/mynotes"
+    }, "My Notes")), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: "/favorites"
+    }, "Favorites"))));
+  };
+
+  _c3 = Navigation;
+  var _default = Navigation;
+  exports["default"] = _default;
+
+  var _c, _c2, _c3;
+
+  $RefreshReg$(_c, "Nav");
+  $RefreshReg$(_c2, "NavList");
+  $RefreshReg$(_c3, "Navigation");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

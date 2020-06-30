@@ -1,0 +1,53 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+  var _Header = _interopRequireDefault(require("./Header"));
+
+  var _Navigation = _interopRequireDefault(require("./Navigation"));
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  var Wrapper = _c = _styledComponents["default"].div.withConfig({
+    displayName: "Layout___c",
+    componentId: "vgrqan-0"
+  })(["@media (min-width:700px){display:flex;top:64px;position:relative;height:calc(100%-64px);width:100%;flex:auto;flex-direction:column;}"]);
+
+  var Main = _c2 = _styledComponents["default"].main.withConfig({
+    displayName: "Layout___c2",
+    componentId: "vgrqan-1"
+  })(["position:fixed;height:calc(100% - 185px);width:100%;padding:1em;overflow-y:scroll;@media (min-width:700px){flex:1;margin-left:220px;height:calc(100% - 64px);width:calc(100% - 220px);}"]);
+
+  var Layout = function Layout(_ref) {
+    var children = _ref.children;
+    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_Header["default"], null), /*#__PURE__*/_react["default"].createElement(Wrapper, null, /*#__PURE__*/_react["default"].createElement(_Navigation["default"], null), /*#__PURE__*/_react["default"].createElement(Main, null, children)));
+  };
+
+  _c3 = Layout;
+  var _default = Layout;
+  exports["default"] = _default;
+
+  var _c, _c2, _c3;
+
+  $RefreshReg$(_c, "Wrapper");
+  $RefreshReg$(_c2, "Main");
+  $RefreshReg$(_c3, "Layout");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

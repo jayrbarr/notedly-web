@@ -1,0 +1,71 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _reactMarkdown = _interopRequireDefault(require("react-markdown"));
+
+  var _dateFns = require("date-fns");
+
+  var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  var StyledNote = _c = _styledComponents["default"].article.withConfig({
+    displayName: "Note___c",
+    componentId: "sc-13512g6-0"
+  })(["max-width:800px;margin:0 auto;"]);
+
+  var MetaData = _c2 = _styledComponents["default"].div.withConfig({
+    displayName: "Note___c2",
+    componentId: "sc-13512g6-1"
+  })(["@media (min-width:500px){display:flex;align-items:top;}"]);
+
+  var MetaInfo = _c3 = _styledComponents["default"].div.withConfig({
+    displayName: "Note___c3",
+    componentId: "sc-13512g6-2"
+  })(["padding-right:1em;"]);
+
+  var UserAction = _c4 = _styledComponents["default"].div.withConfig({
+    displayName: "Note___c4",
+    componentId: "sc-13512g6-3"
+  })(["margin-left:auto;"]);
+
+  var Note = function Note(_ref) {
+    var note = _ref.note;
+    return /*#__PURE__*/_react["default"].createElement(StyledNote, null, /*#__PURE__*/_react["default"].createElement(MetaData, null, /*#__PURE__*/_react["default"].createElement(MetaInfo, null, /*#__PURE__*/_react["default"].createElement("img", {
+      src: note.author.avatar,
+      alt: "{note.author.username} avatar",
+      height: "50px"
+    })), /*#__PURE__*/_react["default"].createElement(MetaInfo, null, /*#__PURE__*/_react["default"].createElement("em", null, "by"), " ", note.author.username, " ", /*#__PURE__*/_react["default"].createElement("br", null), (0, _dateFns.format)((0, _dateFns.parseISO)(note.createdAt), 'MMM do yyyy')), /*#__PURE__*/_react["default"].createElement(UserAction, null, /*#__PURE__*/_react["default"].createElement("em", null, "Favorites:"), " ", note.favoriteCount)), /*#__PURE__*/_react["default"].createElement(_reactMarkdown["default"], {
+      source: note.content
+    }));
+  };
+
+  _c5 = Note;
+  var _default = Note;
+  exports["default"] = _default;
+
+  var _c, _c2, _c3, _c4, _c5;
+
+  $RefreshReg$(_c, "StyledNote");
+  $RefreshReg$(_c2, "MetaData");
+  $RefreshReg$(_c3, "MetaInfo");
+  $RefreshReg$(_c4, "UserAction");
+  $RefreshReg$(_c5, "Note");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

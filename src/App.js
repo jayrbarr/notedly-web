@@ -1,17 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 
 import GlobalStyle from './components/GlobalStyle';
 import Pages from './pages';
 
 const uri = process.env.API_URI;
+const httpLink = createHttpLink({ uri });
 const cache = new InMemoryCache();
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      authorization: localStorage.getItem('notejwt2020') || ''
+    }
+  }
+});
+
 const client = new ApolloClient({
-  uri,
+  link: authLink.concat(httpLink),
   cache,
+  resolvers: {},
   connectToDevTools: true
-})
+});
+
+const data = {
+  isLoggedIn: !!localStorage.getItem('notejwt2020')
+};
+
+cache.writeData({ data });
+
+client.onResetStore(() => cache.writeData({ data }));
 
 const App = () => {
   return (

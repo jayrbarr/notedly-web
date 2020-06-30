@@ -1,0 +1,55 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+  var _reactRouterDom = require("react-router-dom");
+
+  var _Note = _interopRequireDefault(require("./Note"));
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  var NoteWrapper = _c = _styledComponents["default"].div.withConfig({
+    displayName: "NoteFeed___c",
+    componentId: "sc-1vi1ihu-0"
+  })(["max-width:800px;margin:0 auto;margin-bottom:2em;padding-bottom:2em;border-bottom:1px solid #f5f4f0;"]);
+
+  var NoteFeed = function NoteFeed(_ref) {
+    var notes = _ref.notes;
+    return /*#__PURE__*/_react["default"].createElement("div", null, notes.map(function (note) {
+      return /*#__PURE__*/_react["default"].createElement(NoteWrapper, {
+        key: note.id
+      }, /*#__PURE__*/_react["default"].createElement(_Note["default"], {
+        note: note
+      }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+        to: "note/".concat(note.id)
+      }, "Permalink"));
+    }));
+  };
+
+  _c2 = NoteFeed;
+  var _default = NoteFeed;
+  exports["default"] = _default;
+
+  var _c, _c2;
+
+  $RefreshReg$(_c, "NoteWrapper");
+  $RefreshReg$(_c2, "NoteFeed");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

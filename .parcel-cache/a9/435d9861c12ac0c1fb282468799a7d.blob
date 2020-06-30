@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="6c0eab8abf300d55f8722548936b7eed" type="image/x-icon">
+    <title>Notedly</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="5da42b1b7c4c1359983e40f57e75c992"></script>
+  </body>
+</html>

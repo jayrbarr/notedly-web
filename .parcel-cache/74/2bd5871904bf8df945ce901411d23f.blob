@@ -1,0 +1,105 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _reactHooks = require("@apollo/react-hooks");
+
+  var _apolloBoost = require("apollo-boost");
+
+  var _NoteFeed = _interopRequireDefault(require("../components/NoteFeed"));
+
+  var _Button = _interopRequireDefault(require("../components/Button"));
+
+  var _s = $RefreshSig$();
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+  function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+  function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+  function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+  function _templateObject() {
+    var data = _taggedTemplateLiteral(["\n  query noteFeed($cursor: String) {\n    noteFeed (cursor: $cursor) {\n      cursor\n      hasNextPage\n      notes {\n        id\n        createdAt\n        content\n        favoriteCount\n        author {\n          username\n          id\n          avatar\n        }\n      }\n    }\n  }\n"]);
+
+    _templateObject = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+  var GET_NOTES = (0, _apolloBoost.gql)(_templateObject());
+
+  var Home = function Home() {
+    _s();
+
+    var _useQuery = (0, _reactHooks.useQuery)(GET_NOTES),
+        data = _useQuery.data,
+        loading = _useQuery.loading,
+        error = _useQuery.error,
+        fetchMore = _useQuery.fetchMore;
+
+    if (loading) return /*#__PURE__*/_react["default"].createElement("p", null, "Loading...");
+    if (error) return /*#__PURE__*/_react["default"].createElement("p", null, "Error!");
+    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_NoteFeed["default"], {
+      notes: data.noteFeed.notes
+    }), data.noteFeed.hasNextPage && /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+      onClick: function onClick() {
+        fetchMore({
+          variables: {
+            cursor: data.noteFeed.cursor
+          },
+          updateQuery: function updateQuery(previousResult, _ref) {
+            var fetchMoreResult = _ref.fetchMoreResult;
+            return {
+              noteFeed: {
+                cursor: fetchMoreResult.noteFeed.cursor,
+                hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+                notes: [].concat(_toConsumableArray(previousResult.noteFeed.notes), _toConsumableArray(fetchMoreResult.noteFeed.notes)),
+                __typename: 'noteFeed'
+              }
+            };
+          }
+        });
+      }
+    }, "Load more"));
+  };
+
+  _s(Home, "8mFktq5kjIE6u1x6dqFQr3PRIig=", false, function () {
+    return [_reactHooks.useQuery];
+  });
+
+  _c = Home;
+  var _default = Home;
+  exports["default"] = _default;
+
+  var _c;
+
+  $RefreshReg$(_c, "Home");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

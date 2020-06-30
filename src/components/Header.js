@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+import { Link, withRouter } from 'react-router-dom';
 
-import logo from '../img/logo.svg';
+// import logo from '../img/logo.svg';
+import ButtonAsLink from '../components/ButtonAsLink';
+
+const IS_LOGGED_IN = gql`
+  {
+    isLoggedIn @client
+  }
+`;
 
 const HeaderBar = styled.header`
   width: 100%;
@@ -21,13 +31,36 @@ const LogoText = styled.h1`
   display: inline;
 `;
 
+const UserState = styled.div`
+  margin-left: auto;
+`;
+
 const Header = () => {
+  const { data, client } = useQuery(IS_LOGGED_IN);
+
+  const onLogOutClick = () => {
+    localStorage.removeItem('notejwt2020');
+    client.resetStore();
+    client.writeData({ data: { isLoggedIn: false } });
+    props.history.push('/');
+  }
+
   return (
     <HeaderBar>
-      <img src={logo} alt="Notedly Logo" height="40" />
+      {/* <img src={logo} alt="Notedly Logo" height="40" /> */}
       <LogoText>Notedly</LogoText>
+      <UserState>
+        {data.isLoggedIn ? (
+          <ButtonAsLink onClick={onLogOutClick}>Log Out</ButtonAsLink>
+        ) : (
+            <p>
+              <Link to={'/signin'}>Sign In</Link> or{' '}
+              <Link to={'/signup'}>Sign Up</Link>
+            </p>
+          )}
+      </UserState>
     </HeaderBar>
   );
 }
 
-export default Header;
+export default withRouter(Header);

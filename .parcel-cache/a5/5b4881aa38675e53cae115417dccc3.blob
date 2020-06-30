@@ -1,0 +1,136 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireWildcard(require("react"));
+
+  var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+  var _Button = _interopRequireDefault(require("./Button"));
+
+  var _s2 = $RefreshSig$();
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+  function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+  function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+  function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var Wrapper = _c = _styledComponents["default"].div.withConfig({
+    displayName: "UserForm___c",
+    componentId: "sc-11q4a2m-0"
+  })(["border:1px solid #f5f4f0;max-width:500px;padding:1em;margin:0 auto;"]);
+
+  var Form = _c2 = _styledComponents["default"].form.withConfig({
+    displayName: "UserForm___c2",
+    componentId: "sc-11q4a2m-1"
+  })(["label,input{display:block;line-height:2em;}input{width:100%;margin-bottom:1em;}"]);
+
+  var UserForm = function UserForm(props) {
+    _s2();
+
+    var _useState = (0, _react.useState)(),
+        _useState2 = _slicedToArray(_useState, 2),
+        values = _useState2[0],
+        setValues = _useState2[1];
+
+    var onChange = function onChange(event) {
+      setValues(_objectSpread(_objectSpread({}, values), {}, _defineProperty({}, event.target.name, event.target.value)));
+    };
+
+    var _onSubmit = function onSubmit(event, type) {
+      event.preventDefault();
+      type({
+        variables: _objectSpread({}, values)
+      });
+    };
+
+    var onSignIn = function onSignIn(event) {
+      event.preventDefault();
+      signIn({
+        variables: _objectSpread({}, values)
+      });
+    };
+
+    return /*#__PURE__*/_react["default"].createElement(Wrapper, null, props.formType === 'signup' ? /*#__PURE__*/_react["default"].createElement("h2", null, "Sign Up") : /*#__PURE__*/_react["default"].createElement("h2", null, "Sign In"), /*#__PURE__*/_react["default"].createElement(Form, {
+      onSubmit: function onSubmit(e) {
+        return _onSubmit(e, props.action);
+      }
+    }, props.formType === 'signup' && /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement("label", {
+      htmlFor: "username"
+    }, "Username:"), /*#__PURE__*/_react["default"].createElement("input", {
+      required: true,
+      type: "text",
+      id: "username",
+      name: "username",
+      placeholder: "Username",
+      onChange: onChange
+    })), /*#__PURE__*/_react["default"].createElement("label", {
+      htmlFor: "email"
+    }, "Email:"), /*#__PURE__*/_react["default"].createElement("input", {
+      required: true,
+      type: "email",
+      id: "email",
+      name: "email",
+      placeholder: "Email",
+      onChange: onChange
+    }), /*#__PURE__*/_react["default"].createElement("label", {
+      htmlFor: "password"
+    }, "Password:"), /*#__PURE__*/_react["default"].createElement("input", {
+      required: true,
+      type: "password",
+      id: "password",
+      name: "password",
+      placeholder: "Password",
+      onChange: onChange
+    }), /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+      type: "submit"
+    }, "Submit")));
+  };
+
+  _s2(UserForm, "TkUJM+Bqr8wo9+ZnD0nVhxGV9SI=");
+
+  _c3 = UserForm;
+  var _default = UserForm;
+  exports["default"] = _default;
+
+  var _c, _c2, _c3;
+
+  $RefreshReg$(_c, "Wrapper");
+  $RefreshReg$(_c2, "Form");
+  $RefreshReg$(_c3, "UserForm");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

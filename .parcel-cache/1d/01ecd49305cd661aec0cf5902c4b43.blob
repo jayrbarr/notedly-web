@@ -1,0 +1,108 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireDefault(require("react"));
+
+  var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+  var _reactHooks = require("@apollo/react-hooks");
+
+  var _apolloBoost = _interopRequireDefault(require("apollo-boost"));
+
+  var _reactRouterDom = require("react-router-dom");
+
+  var _ButtonAsLink = _interopRequireDefault(require("../components/ButtonAsLink"));
+
+  var _s = $RefreshSig$();
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  function _templateObject() {
+    var data = _taggedTemplateLiteral(["\n  {\n    isLoggedIn @client\n  }\n"]);
+
+    _templateObject = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+  var IS_LOGGED_IN = (0, _apolloBoost["default"])(_templateObject());
+
+  var HeaderBar = _c = _styledComponents["default"].header.withConfig({
+    displayName: "Header___c",
+    componentId: "h5lhbt-0"
+  })(["width:100%;padding:0.5em 1em;display:flex;height:64px;position:fixed;align-items:center;background-color:#fff;box-shadow:0 0 5px 0 rgba(0,0,0,0.25);z-index:1;"]);
+
+  var LogoText = _c2 = _styledComponents["default"].h1.withConfig({
+    displayName: "Header___c2",
+    componentId: "h5lhbt-1"
+  })(["margin:0;padding:0;display:inline;"]);
+
+  var UserState = _c3 = _styledComponents["default"].div.withConfig({
+    displayName: "Header___c3",
+    componentId: "h5lhbt-2"
+  })(["margin-left:auto;"]);
+
+  var Header = function Header() {
+    _s();
+
+    var _useQuery = (0, _reactHooks.useQuery)(IS_LOGGED_IN),
+        data = _useQuery.data,
+        client = _useQuery.client;
+
+    var onLogOutClick = function onLogOutClick() {
+      localStorage.removeItem('notejwt2020');
+      client.resetStore();
+      client.writeData({
+        data: {
+          isLoggedIn: false
+        }
+      });
+      props.history.push('/');
+    };
+
+    return /*#__PURE__*/_react["default"].createElement(HeaderBar, null, /*#__PURE__*/_react["default"].createElement(LogoText, null, "Notedly"), /*#__PURE__*/_react["default"].createElement(UserState, null, data.isLoggedIn ? /*#__PURE__*/_react["default"].createElement(_ButtonAsLink["default"], {
+      onClick: onLogOutClick
+    }, "Log Out") : /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: '/signin'
+    }, "Sign In"), " or", ' ', /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: '/signup'
+    }, "Sign Up"))));
+  };
+
+  _s(Header, "k1uAL6ZY2aABS5aN7ishLiN76gU=", false, function () {
+    return [_reactHooks.useQuery];
+  });
+
+  _c4 = Header;
+
+  var _default = _c5 = (0, _reactRouterDom.withRouter)(Header);
+
+  exports["default"] = _default;
+
+  var _c, _c2, _c3, _c4, _c5;
+
+  $RefreshReg$(_c, "HeaderBar");
+  $RefreshReg$(_c2, "LogoText");
+  $RefreshReg$(_c3, "UserState");
+  $RefreshReg$(_c4, "Header");
+  $RefreshReg$(_c5, "%default%");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

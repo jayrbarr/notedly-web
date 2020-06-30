@@ -1,0 +1,133 @@
+"use strict";
+
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+  function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = void 0;
+
+  var _react = _interopRequireWildcard(require("react"));
+
+  var _reactRouterDom = require("react-router-dom");
+
+  var _reactHooks = require("@apollo/react-hooks");
+
+  var _apolloBoost = require("apollo-boost");
+
+  var _Layout = _interopRequireDefault(require("../components/Layout"));
+
+  var _home = _interopRequireDefault(require("./home"));
+
+  var _mynotes = _interopRequireDefault(require("./mynotes"));
+
+  var _favorites = _interopRequireDefault(require("./favorites"));
+
+  var _note = _interopRequireDefault(require("./note"));
+
+  var _signup = _interopRequireDefault(require("./signup"));
+
+  var _s = $RefreshSig$();
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+  function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+  function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+  function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+  function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+  function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+  function _templateObject() {
+    var data = _taggedTemplateLiteral(["\n  {\n    isLoggedIn @client\n  }\n"]);
+
+    _templateObject = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+  var IS_LOGGED_IN = (0, _apolloBoost.gql)(_templateObject());
+
+  var Pages = function Pages() {
+    return /*#__PURE__*/_react["default"].createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react["default"].createElement(_Layout["default"], null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+      exact: true,
+      path: "/",
+      component: _home["default"]
+    }), /*#__PURE__*/_react["default"].createElement(PrivateRoute, {
+      path: "/mynotes",
+      component: _mynotes["default"]
+    }), /*#__PURE__*/_react["default"].createElement(PrivateRoute, {
+      path: "/favorites",
+      component: _favorites["default"]
+    }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+      path: "/note/:id",
+      component: _note["default"]
+    }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+      path: "/signup",
+      component: _signup["default"]
+    }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+      path: "/signin",
+      component: SignIn
+    })));
+  };
+
+  _c = Pages;
+
+  var PrivateRoute = function PrivateRoute(_ref) {
+    _s();
+
+    var Component = _ref.component,
+        rest = _objectWithoutProperties(_ref, ["component"]);
+
+    var _useQuery = (0, _reactHooks.useQuery)(IS_LOGGED_IN),
+        loading = _useQuery.loading,
+        error = _useQuery.error,
+        data = _useQuery.data;
+
+    if (loading) return /*#__PURE__*/_react["default"].createElement("p", null, "Loading...");
+    if (error) return /*#__PURE__*/_react["default"].createElement("p", null, "Error!");
+    return /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, _extends({}, rest, {
+      render: function render(props) {
+        return data.isLoggedIn === true ? /*#__PURE__*/_react["default"].createElement(Component, props) : /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Redirect, {
+          to: {
+            pathname: '/signin',
+            state: {
+              from: props.location
+            }
+          }
+        });
+      }
+    }));
+  };
+
+  _s(PrivateRoute, "OQZiY3KqWoytFPIJWw/H9Hrmbok=", false, function () {
+    return [_reactHooks.useQuery];
+  });
+
+  _c2 = PrivateRoute;
+  var _default = Pages;
+  exports["default"] = _default;
+
+  var _c, _c2;
+
+  $RefreshReg$(_c, "Pages");
+  $RefreshReg$(_c2, "PrivateRoute");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
