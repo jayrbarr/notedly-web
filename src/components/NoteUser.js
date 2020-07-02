@@ -4,6 +4,7 @@ import { gql } from 'apollo-boost';
 import { Link } from 'react-router-dom';
 
 import DeleteNote from './DeleteNote';
+import FavoriteNote from './FavoriteNote';
 
 import { GET_ME } from '../gql/query';
 
@@ -14,7 +15,12 @@ const NoteUser = props => {
 
   return (
     <>
-      Favorites: {props.note.favoritesCount}<br />
+      <FavoriteNote
+        me={data.me}
+        noteId={props.note.id}
+        favoriteCount={props.note.favoriteCount}
+      />
+      <br />
       {data.me.id === props.note.author.id &&
         <>
           <Link to={`/edit/${props.note.id}`}>Edit</Link><br />
