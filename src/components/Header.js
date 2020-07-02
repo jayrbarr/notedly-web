@@ -39,7 +39,7 @@ const Header = (props) => {
   const { data, client } = useQuery(IS_LOGGED_IN);
 
   const onLogOutClick = () => {
-    localStorage.removeItem('notejwt2020');
+    localStorage.removeItem('token');
     client.resetStore();
     client.writeData({ data: { isLoggedIn: false } });
     props.history.push('/');

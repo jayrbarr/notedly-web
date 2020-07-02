@@ -20,7 +20,7 @@ const EditNote = props => {
   });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error! Note not found.</p>;
-  if (userdata.me.id !== data.note.author.id) {
+  if (!userdata || userdata.me.id !== data.note.author.id) {
     return <p>You do not have access to edit this note.</p>;
   } else {
     return <NoteForm content={data.note.content} action={editNote} />;

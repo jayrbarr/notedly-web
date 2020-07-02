@@ -18,7 +18,7 @@ const SignIn = props => {
   const client = useApolloClient();
   const [signIn, { loading, error }] = useMutation(SIGNIN_USER, {
     onCompleted: data => {
-      localStorage.setItem('notejwt2020', data.signIn);
+      localStorage.setItem('token', data.signIn);
       client.writeData({ data: { isLoggedIn: true } });
       props.history.push('/');
     }

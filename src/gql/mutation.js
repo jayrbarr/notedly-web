@@ -19,4 +19,23 @@ const EDIT_NOTE = gql`
   }
 `;
 
-export { EDIT_NOTE };
+const NEW_NOTE = gql`
+  mutation newNote($content: String!) {
+    newNote(content: $content) {
+      id
+      content
+      createdAt
+      favoriteCount
+      favoritedBy {
+        id
+        username
+      }
+      author {
+        username
+        id
+      }
+    }
+  }
+`;
+
+export { EDIT_NOTE, NEW_NOTE };

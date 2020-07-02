@@ -16,7 +16,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: localStorage.getItem('notejwt2020') || ''
+      authorization: localStorage.getItem('token') || ''
     }
   }
 });
@@ -29,7 +29,7 @@ const client = new ApolloClient({
 });
 
 const data = {
-  isLoggedIn: !!localStorage.getItem('notejwt2020')
+  isLoggedIn: !!localStorage.getItem('token')
 };
 
 cache.writeData({ data });

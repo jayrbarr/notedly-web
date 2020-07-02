@@ -34,17 +34,7 @@ const UserForm = props => {
 
   const onSubmit = (event, type) => {
     event.preventDefault();
-    console.log("login here");
     type({
-      variables: {
-        ...values
-      }
-    });
-  }
-
-  const onSignIn = event => {
-    event.preventDefault();
-    signIn({
       variables: {
         ...values
       }

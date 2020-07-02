@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   height: 100%;
 `;
 
@@ -28,10 +28,9 @@ const NoteForm = props => {
 
   const onSubmit = (event, type) => {
     event.preventDefault();
-    console.log("newnote here");
     type({
       variables: {
-        ...values
+        ...value
       }
     });
   }
