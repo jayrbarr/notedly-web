@@ -35,7 +35,7 @@ const UserState = styled.div`
   margin-left: auto;
 `;
 
-const Header = () => {
+const Header = (props) => {
   const { data, client } = useQuery(IS_LOGGED_IN);
 
   const onLogOutClick = () => {

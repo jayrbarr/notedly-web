@@ -34,6 +34,7 @@ const UserForm = props => {
 
   const onSubmit = (event, type) => {
     event.preventDefault();
+    console.log("login here");
     type({
       variables: {
         ...values
